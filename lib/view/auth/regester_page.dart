@@ -22,32 +22,30 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-          leading: IconButton(
+        leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: const Icon(
+              LineAwesomeIcons.angle_left,
+            )),
+        actions: [
+          IconButton(
               onPressed: () {
-                Get.back();
-              },
-              icon: const Icon(
-                LineAwesomeIcons.angle_left,
-              )),
-          actions: [
-            IconButton(
-                onPressed: () {
-                  /*
+                /*
                   if (Get.isDarkMode) {
                     Get.changeTheme(Themes.customLightTheme);
                   } else {
                     Get.changeTheme(Themes.customDarkTheme);
                   }*/
-                },
-                icon: const Icon(
-                  Icons.brightness_6,
-                ))
-          ],
-          title:const Text(
-            'Sign Up',style: TextStyle(fontSize: 25.0)
-          ),
-          centerTitle: true,
-        ),
+              },
+              icon: const Icon(
+                Icons.brightness_6,
+              ))
+        ],
+        title: const Text('Sign Up', style: TextStyle(fontSize: 25.0)),
+        centerTitle: true,
+      ),
       body: Container(
         /*decoration: const BoxDecoration(
           image: DecorationImage(
@@ -69,64 +67,65 @@ class _RegisterPageState extends State<RegisterPage> {
                     alignment: Alignment.center,
                   ),*/
                   Row(
-  crossAxisAlignment: CrossAxisAlignment.start,
-  children: [
-    Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const CustomText(
-            text: 'First Name',
-            color: Colors.white60,
-          ),
-          SizedBox(height: size.height/300),
-          // First Name field          
-          TextField(
-
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(
-                  vertical: 10.0, horizontal: 15.0),
-              hintText: 'fname',
-              hintStyle: const TextStyle(color: Colors.black26),
-              filled: true,
-              fillColor: Colors.white,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12.0),
-              ),
-            ),
-          ),
-        ],
-      ),
-    ),
-    const SizedBox(width: 20), // مسافة بين الحقلين
-    Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const CustomText(
-            text: 'Last Name',
-            color: Colors.white60,
-          ),
-          SizedBox(height: size.height/300),
-          // Last Name field          
-          TextField(
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(
-                  vertical: 10.0, horizontal: 15.0),
-              hintText: 'lname',
-              hintStyle: const TextStyle(color: Colors.black26),
-              filled: true,
-              fillColor: Colors.white,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12.0),
-              ),
-            ),
-          ),
-        ],
-      ),
-    ),
-  ],
-),
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const CustomText(
+                              text: 'First Name',
+                              color: Colors.white60,
+                            ),
+                            SizedBox(height: size.height / 300),
+                            // First Name field
+                            TextField(
+                              decoration: InputDecoration(
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 10.0, horizontal: 15.0),
+                                hintText: 'fname',
+                                hintStyle:
+                                    const TextStyle(color: Colors.black26),
+                                filled: true,
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 20), // مسافة بين الحقلين
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const CustomText(
+                              text: 'Last Name',
+                              color: Colors.white60,
+                            ),
+                            SizedBox(height: size.height / 300),
+                            // Last Name field
+                            TextField(
+                              decoration: InputDecoration(
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 10.0, horizontal: 15.0),
+                                hintText: 'lname',
+                                hintStyle:
+                                    const TextStyle(color: Colors.black26),
+                                filled: true,
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                   /*CustomText(
                     text: 'Full Name :',
                     color: Colors.white60,
@@ -146,13 +145,13 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                   ),*/
-          SizedBox(height: size.height/100),
-                  CustomText(
+                  SizedBox(height: size.height / 100),
+                  const CustomText(
                     text: 'E-mail',
                     color: Colors.white60,
                   ),
-          SizedBox(height: size.height/300),
-                    // Email field
+                  SizedBox(height: size.height / 300),
+                  // Email field
                   TextField(
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.symmetric(
@@ -166,13 +165,13 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                   ),
-          SizedBox(height: size.height/100),
-                  CustomText(
+                  SizedBox(height: size.height / 100),
+                  const CustomText(
                     text: 'Password:',
                     color: Colors.white60,
                   ),
-          SizedBox(height: size.height/300),
-                    // Password field          
+                  SizedBox(height: size.height / 300),
+                  // Password field
                   TextField(
                     obscureText: !_showPassword,
                     decoration: InputDecoration(
@@ -200,12 +199,12 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                   ),
-          SizedBox(height: size.height/100),
+                  SizedBox(height: size.height / 100),
                   CustomText(
                     text: 'Phone Number:',
                     color: Colors.white60,
                   ),
-          SizedBox(height: size.height/300),
+                  SizedBox(height: size.height / 300),
                   TextField(
                     // Phone Number field
                     decoration: InputDecoration(
@@ -220,12 +219,12 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                   ),
-          SizedBox(height: size.height/100),
+                  SizedBox(height: size.height / 100),
                   CustomText(
                     text: 'Location',
                     color: Colors.white60,
                   ),
-          SizedBox(height: size.height/300),
+                  SizedBox(height: size.height / 300),
                   TextField(
                     // location
                     decoration: InputDecoration(
@@ -265,7 +264,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ],
                   ),
-          SizedBox(height: size.height/50),
+                  SizedBox(height: size.height / 50),
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
