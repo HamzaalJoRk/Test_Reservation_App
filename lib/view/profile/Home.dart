@@ -2,12 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reservation_app/components/ProfileMenuWidget.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:reservation_app/view/auth/AuthController.dart';
 import 'package:reservation_app/view/auth/login_page.dart';
+import 'package:reservation_app/view/bottom_bar.dart';
 import 'package:reservation_app/view/profile/profile_details.dart';
+import 'package:http/http.dart' as http;
+import 'package:reservation_app/view/splash.dart';
 
 class HomeProfile extends StatelessWidget {
-  const HomeProfile({super.key});
+  HomeProfile({super.key});
 
+  final AuthController authController = Get.find();
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -45,65 +50,63 @@ class HomeProfile extends StatelessWidget {
                 child: Column(
                   children: [
                     /// -- IMAGE
+
                     Stack(
                       children: [
-                        SizedBox(
+                        if (authController.id != null &&
+                            authController.id !=
+                                0) // إذا كانت القيمة ليست null ولا '0'، يتم عرض الصورة
+                          SizedBox(
                             width: size.width / 2.8,
                             height: size.height / 6,
                             child: ClipRRect(
-                                borderRadius: BorderRadius.circular(100),
-                                child: Image.network(
-                                  'https://cdn.pixabay.com/photo/2015/04/19/08/32/rose-729509_640.jpg',
-                                  /*width: 100,
-                                  height: 100,*/
-                                  fit: BoxFit.cover,
-                                ))),
-                        Positioned(
-                            bottom: 0,
-                            right: 0,
-                            child: Container(
-                                width: size.width / 11,
-                                height: size.height/25,
-                                //35
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: const Color(0xFF8857F1),
-                                ),
-                                child: const Icon(
-                                  LineAwesomeIcons.alternate_pencil,
-                                  color: Colors.black,
-                                  size: 20,
-                                )))
+                              borderRadius: BorderRadius.circular(100),
+                              child: Image.network(
+                                'https://gweb-research-imagen.web.app/compositional/An%20oil%20painting%20of%20a%20British%20Shorthair%20cat%20wearing%20a%20cowboy%20hat%20and%20red%20shirt%20skateboarding%20on%20a%20beach./1_.jpeg',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
                       ],
                     ),
-                    SizedBox(height: size.height/60),
-                    const Text('Ahmad Aldali'),
-                    const Text('ahmadaldali110@gmail.com'),
-                    SizedBox(height: size.height/55),
+                    SizedBox(height: size.height / 60),
+                    Column(
+                      children: [
+                        if (authController.id != null && authController.id != 0)
+                          Text('${authController.name}'),
+                        if (authController.id != null && authController.id != 0)
+                          Text('${authController.email}'),
+                      ],
+                    ),
+                    SizedBox(height: size.height / 55),
 
                     /// -- BUTTON
-                    SizedBox(
-                      width: size.width/2.5,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Get.to(() => const ProfileDetails());
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF8857F1),
-                          side: BorderSide.none,
-                          textStyle: const TextStyle(
-                            color: Colors.white,
+                    if (authController.id != null && authController.id != 0)
+                      SizedBox(
+                        width: size.width / 2.5,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Get.to(() => ProfileDetails());
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF8857F1),
+                            side: BorderSide.none,
+                            textStyle: const TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                          child: Text(
+                            'All Details'.tr,
+                            style: const TextStyle(
+                                color: Colors.white, fontFamily: 'Cairo'),
                           ),
                         ),
-                        child: Text(
-                          'All Details'.tr,
-                          style: const TextStyle(
-                              color: Colors.white, fontFamily: 'Cairo'),
-                        ),
                       ),
-                    ),
+                    if (authController.id == null || authController.id == 0)
+                    SizedBox(height: size.height /9),
+                    if (authController.id == null || authController.id == 0)
                     SizedBox(
-                      width: size.width/2.5,
+                      width: size.width / 2.5,
                       child: ElevatedButton(
                         onPressed: () {
                           Get.to(() => const LoginPage());
@@ -122,7 +125,10 @@ class HomeProfile extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: size.height/40),
+                    if (authController.id == null || authController.id == 0)
+                      SizedBox(height: size.height /7),
+                    /*SizedBox(height: size.height / 5),
+                    SizedBox(height: size.height / 40),*/
                     // const Divider(),
 
                     /// -- MENU
@@ -165,9 +171,9 @@ class HomeProfile extends StatelessWidget {
                             icon: LineAwesomeIcons.user_check,
                             onPress: () {},
                           ),
-                          SizedBox(height: size.height/200),
+                          SizedBox(height: size.height / 200),
                           const Divider(),
-                          SizedBox(height: size.height/200),
+                          SizedBox(height: size.height / 200),
                           ProfileMenuWidget(
                             title: "Languages".tr,
                             icon: LineAwesomeIcons.info,
@@ -192,18 +198,52 @@ class HomeProfile extends StatelessWidget {
                             icon: LineAwesomeIcons.info,
                             onPress: () {},
                           ),
+                          ElevatedButton(
+                              onPressed: () {
+                                logout();
+                              },
+                              child: Text('logout'))
                         ],
                       ),
                     ),
+
                     SizedBox(
-                      height: size.height/45,
+                      height: size.height / 45,
                     ),
                     Text('Copyright All rights reserved'.tr,
                         style: const TextStyle(
                           color: Color.fromARGB(153, 2, 0, 0),
                           fontSize: 12,
                         ))
-     ],
-   ))));
+                  ],
+                ))));
+  }
+
+  //logout funcation
+  void logout() async {
+    final url = Uri.parse('http://10.0.2.2:8000/api/Mobile_Application/logout');
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        // تم تسجيل الخروج بنجاح
+        Get.off(() => SplashScreen());
+        print('Logged out successfully');
+        authController.reset(); // استخدام الدالة reset لمسح قيم المتغيرات
+      } else {
+        // حدث خطأ ما
+        print('Failed to logout. Error: ${response.reasonPhrase}');
+      }
+    } catch (error) {
+      // حدث خطأ أثناء إرسال الطلب
+      print('Error during logout: $error');
+    }
   }
 }

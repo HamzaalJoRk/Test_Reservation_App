@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:reservation_app/Cart/CartController.dart';
+import 'package:reservation_app/view/auth/AuthController.dart';
 import 'package:reservation_app/view/splash.dart';
-
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +16,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+
       title: 'Reservation App',
+      initialBinding: InitialBinding(), // تثبيت المراقب هنا
       home: const SplashScreen(),
       theme: ThemeData(
         textTheme: TextTheme(
@@ -52,5 +55,13 @@ class MyApp extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class InitialBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.put(AuthController());
+    Get.put(CartController());
   }
 }

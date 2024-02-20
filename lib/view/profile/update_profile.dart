@@ -1,12 +1,27 @@
+import 'dart:convert';
+import 'package:reservation_app/view/bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:http/http.dart' as http;
+import 'package:reservation_app/components/Custom_text.dart';
+import 'package:reservation_app/view/auth/AuthController.dart';
+import 'package:reservation_app/view/main_screen.dart';
+import 'package:reservation_app/view/splash.dart';
 
 class UpdateProfileScreen extends StatelessWidget {
-  const UpdateProfileScreen({Key? key}) : super(key: key);
+  UpdateProfileScreen({Key? key}) : super(key: key);
+  final AuthController authController = Get.find();
+
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneNumberController = TextEditingController();
+  final TextEditingController locationController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -18,7 +33,8 @@ class UpdateProfileScreen extends StatelessWidget {
             )),
         actions: [
           IconButton(
-            onPressed: () {/*
+            onPressed: () {
+              /*
               if (Get.isDarkMode) {
                 Get.changeTheme(Themes.customLightTheme);
                 print("Light");
@@ -77,18 +93,73 @@ class UpdateProfileScreen extends StatelessWidget {
               Form(
                 child: Column(
                   children: [
-                    TextFormField(
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50.0),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const CustomText(
+                                text: 'First Name',
+                                color: Colors.black,
+                              ),
+                              SizedBox(height: size.height / 300),
+                              // First Name field
+                              TextFormField(
+                                controller: firstNameController,
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      vertical: 10.0, horizontal: 15.0),
+                                  hintText: 'fname',
+                                  hintStyle:
+                                      const TextStyle(color: Colors.black26),
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                  ),
+                                ),
+                                style: const TextStyle(color: Colors.black),
+                              ),
+                            ],
                           ),
-                          label: Text('FullName'.tr),
-                          prefixIcon: const Icon(
-                            LineAwesomeIcons.user,
-                          )),
+                        ),
+                        const SizedBox(width: 20), // مسافة بين الحقلين
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const CustomText(
+                                text: 'Last Name',
+                                color: Colors.black,
+                              ),
+                              SizedBox(height: size.height / 300),
+                              // Last Name field
+                              TextFormField(
+                                controller: lastNameController,
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      vertical: 10.0, horizontal: 15.0),
+                                  hintText: 'lname',
+                                  hintStyle:
+                                      const TextStyle(color: Colors.black26),
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                  ),
+                                ),
+                                style: const TextStyle(color: Colors.black),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 15),
                     TextFormField(
+                      controller: emailController,
                       decoration: InputDecoration(
                         labelText: 'Email'.tr,
                         prefixIcon: const Icon(
@@ -98,9 +169,11 @@ class UpdateProfileScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(50.0),
                         ),
                       ),
+                      style: const TextStyle(color: Colors.black),
                     ),
                     const SizedBox(height: 15),
                     TextFormField(
+                      controller: phoneNumberController,
                       decoration: InputDecoration(
                         label: Text('PhoneNo'.tr),
                         prefixIcon: const Icon(
@@ -110,22 +183,21 @@ class UpdateProfileScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(50.0),
                         ),
                       ),
+                      style: const TextStyle(color: Colors.black),
                     ),
                     const SizedBox(height: 15),
                     TextFormField(
-                      obscureText: true,
+                      controller: locationController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(50.0),
                         ),
-                        label: Text('Password'.tr),
+                        label: Text('Location'.tr),
                         prefixIcon: const Icon(
                           Icons.fingerprint,
                         ),
-                        suffixIcon: IconButton(
-                            icon: const Icon(LineAwesomeIcons.eye_slash),
-                            onPressed: () {}),
                       ),
+                      style: const TextStyle(color: Colors.black),
                     ),
                     const SizedBox(height: 50),
 
@@ -133,17 +205,24 @@ class UpdateProfileScreen extends StatelessWidget {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          // تنفيذ طلب التحديث هنا
+                          updateProfile();
+                          Get.to(() => SplashScreen());
+                        },
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF8857F1),
-                            side: BorderSide.none,
-                            shape: const StadiumBorder(),
-                            textStyle: const TextStyle(
+                          backgroundColor: const Color(0xFF8857F1),
+                          side: BorderSide.none,
+                          shape: const StadiumBorder(),
+                          textStyle: const TextStyle(
                             color: Colors.white,
                           ),
-                            ),
-                            
-                        child: Text('Edit Profile'.tr,style: const TextStyle(color: Colors.white,fontFamily: 'Cairo'),),
+                        ),
+                        child: Text(
+                          'Edit Profile'.tr,
+                          style: const TextStyle(
+                              color: Colors.white, fontFamily: 'Cairo'),
+                        ),
                       ),
                     ),
                     const SizedBox(height: 50),
@@ -155,5 +234,40 @@ class UpdateProfileScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  // دالة لتحديث ملف التعريف
+  void updateProfile() async {
+    try {
+      Map<String, dynamic> body = {
+        'fname': firstNameController.text,
+        'lname': lastNameController.text,
+        'email': emailController.text,
+        'location': locationController.text,
+        'phoneNumber': phoneNumberController.text,
+      };
+
+      // إرسال طلب التحديث
+      final response = await http.put(
+        Uri.parse(
+            'http://10.0.2.2:8000/api/Mobile_Application/user/${authController.id}'), // استبدل بعنوان URL الخاص بك وبالقيمة الفعلية لمعرف المستخدم
+        body: jsonEncode(body),
+        headers: <String, String>{
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          //'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
+      print(authController.id);
+      // التحقق من نجاح الطلب
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        Get.off(() => Bottombar());
+        print('Profile Updated Successfully');
+      } else {
+        print('Failed to update profile');
+      }
+    } catch (e) {
+      print('Error updating profile: $e');
+    }
   }
 }

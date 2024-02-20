@@ -13,10 +13,10 @@ class _BottombarState extends State<Bottombar> {
   int currentIndex = 0;
 
   final List<Widget> pages = [
-    MainScreen(),
-    MainScreen(),
-    MainScreen(),
-    MainScreen(),
+    const MainScreen(),
+    const MainScreen(),
+    const MainScreen(),
+    const MainScreen(),
     HomeProfile()
   ];
   Widget build(BuildContext context) {
