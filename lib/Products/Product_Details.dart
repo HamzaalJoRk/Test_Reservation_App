@@ -122,6 +122,13 @@ class ProductDetails extends StatelessWidget {
                             cartController.addToCart(item);
                             Get.to(() => MainScreen());
                             item.added = true;
+                            Get.snackbar(
+                              '',
+                              'تمت الاضافة الى السلة بنجاح',
+                              backgroundColor: Colors.green,
+                              colorText: Colors.white,
+                              snackPosition: SnackPosition.BOTTOM,
+                            );
                           },
                           text: 'Add to Cart',
                           color: Colors.white,
