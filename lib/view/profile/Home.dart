@@ -3,16 +3,15 @@ import 'package:get/get.dart';
 import 'package:reservation_app/components/ProfileMenuWidget.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:reservation_app/view/auth/AuthController.dart';
+import 'package:reservation_app/view/auth/AuthService.dart';
 import 'package:reservation_app/view/auth/login_page.dart';
-import 'package:reservation_app/view/bottom_bar.dart';
 import 'package:reservation_app/view/profile/profile_details.dart';
-import 'package:http/http.dart' as http;
-import 'package:reservation_app/view/splash.dart';
 
 class HomeProfile extends StatelessWidget {
   HomeProfile({super.key});
 
   final AuthController authController = Get.find();
+  final AuthService _authService = AuthService();
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -27,14 +26,7 @@ class HomeProfile extends StatelessWidget {
               )),
           actions: [
             IconButton(
-                onPressed: () {
-                  /*
-                  if (Get.isDarkMode) {
-                    Get.changeTheme(Themes.customLightTheme);
-                  } else {
-                    Get.changeTheme(Themes.customDarkTheme);
-                  }*/
-                },
+                onPressed: () {},
                 icon: const Icon(
                   Icons.brightness_6,
                 ))
@@ -49,13 +41,10 @@ class HomeProfile extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 child: Column(
                   children: [
-                    /// -- IMAGE
-
+                    /// Image
                     Stack(
                       children: [
-                        if (authController.id != null &&
-                            authController.id !=
-                                0) // إذا كانت القيمة ليست null ولا '0'، يتم عرض الصورة
+                        if (authController.id != null && authController.id != 0)
                           SizedBox(
                             width: size.width / 2.8,
                             height: size.height / 6,
@@ -70,6 +59,7 @@ class HomeProfile extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: size.height / 60),
+
                     Column(
                       children: [
                         if (authController.id != null && authController.id != 0)
@@ -102,31 +92,32 @@ class HomeProfile extends StatelessWidget {
                           ),
                         ),
                       ),
+
                     if (authController.id == null || authController.id == 0)
-                    SizedBox(height: size.height /9),
+                      SizedBox(height: size.height / 9),
                     if (authController.id == null || authController.id == 0)
-                    SizedBox(
-                      width: size.width / 2.5,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Get.to(() => const LoginPage());
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF8857F1),
-                          side: BorderSide.none,
-                          textStyle: const TextStyle(
-                            color: Colors.white,
+                      SizedBox(
+                        width: size.width / 2.5,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Get.to(() => const LoginPage());
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF8857F1),
+                            side: BorderSide.none,
+                            textStyle: const TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                          child: Text(
+                            'Login / register'.tr,
+                            style: const TextStyle(
+                                color: Colors.white, fontFamily: 'Cairo'),
                           ),
                         ),
-                        child: Text(
-                          'Login / register'.tr,
-                          style: const TextStyle(
-                              color: Colors.white, fontFamily: 'Cairo'),
-                        ),
                       ),
-                    ),
                     if (authController.id == null || authController.id == 0)
-                      SizedBox(height: size.height /7),
+                      SizedBox(height: size.height / 7),
                     /*SizedBox(height: size.height / 5),
                     SizedBox(height: size.height / 40),*/
                     // const Divider(),
@@ -200,7 +191,7 @@ class HomeProfile extends StatelessWidget {
                           ),
                           ElevatedButton(
                               onPressed: () {
-                                logout();
+                                _authService.logout();
                               },
                               child: Text('logout'))
                         ],
@@ -218,7 +209,7 @@ class HomeProfile extends StatelessWidget {
                   ],
                 ))));
   }
-
+/*
   //logout funcation
   void logout() async {
     final url = Uri.parse('http://10.0.2.2:8000/api/Mobile_Application/logout');
@@ -245,5 +236,5 @@ class HomeProfile extends StatelessWidget {
       // حدث خطأ أثناء إرسال الطلب
       print('Error during logout: $error');
     }
-  }
+  }*/
 }

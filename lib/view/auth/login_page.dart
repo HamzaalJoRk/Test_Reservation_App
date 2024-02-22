@@ -1,12 +1,10 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:reservation_app/components/Custom_text.dart';
 import 'package:reservation_app/view/auth/AuthController.dart';
+import 'package:reservation_app/view/auth/AuthService.dart';
 import 'package:reservation_app/view/auth/regester_page.dart';
-import 'package:reservation_app/view/bottom_bar.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -21,7 +19,15 @@ class _LoginPageState extends State<LoginPage> {
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final AuthService _authService = AuthService();
 
+  Future<void> loginUser() async {
+    String email = emailController.text;
+    String password = passwordController.text;
+
+    await _authService.loginUser(email, password);
+  }
+/*
   final AuthController authController = Get.find();
   // الدالة لتسجيل الدخول
   Future<void> loginUser() async {
@@ -71,6 +77,7 @@ class _LoginPageState extends State<LoginPage> {
       print('حدث خطأ : $error');
     }
   }
+*/
 
   @override
   Widget build(BuildContext context) {
@@ -109,6 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                     color: Colors.white60,
                   ),
                   SizedBox(height: size.height / 300),
+                  // Email
                   TextField(
                     controller: emailController,
                     decoration: InputDecoration(
@@ -129,6 +137,7 @@ class _LoginPageState extends State<LoginPage> {
                     color: Colors.white60,
                   ),
                   SizedBox(height: size.height / 300),
+                  // Password
                   TextField(
                     controller: passwordController,
                     obscureText: !_showPassword,

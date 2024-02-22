@@ -23,7 +23,7 @@ class _RegisterPageState extends State<RegisterPage> {
   bool _showPassword = false;
   bool _agreeToTerms = false;
   File? _image;
-final AuthController authController = Get.find();
+  final AuthController authController = Get.find();
 
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
@@ -32,7 +32,7 @@ final AuthController authController = Get.find();
   final TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
 
-Future<void> registerUser() async {
+  Future<void> registerUser() async {
     final String imagePath = _image?.path ?? '';
     String base64Image = '';
 
@@ -50,7 +50,8 @@ Future<void> registerUser() async {
       'personImage': base64Image,
     };
 
-    final Uri url = Uri.parse('http://10.0.2.2:8000/api/Mobile_Application/register');
+    final Uri url =
+        Uri.parse('http://10.0.2.2:8000/api/Mobile_Application/register');
 
     try {
       final response = await http.post(
@@ -86,7 +87,7 @@ Future<void> registerUser() async {
           colorText: Colors.white,
           snackPosition: SnackPosition.BOTTOM,
         );
-        Get.to(()=>const Bottombar());
+        Get.to(() => const Bottombar());
       } else {
         print('Error: ${response.statusCode}');
       }
@@ -146,7 +147,7 @@ Future<void> registerUser() async {
                                     vertical: 10.0, horizontal: 15.0),
                                 hintText: 'fname',
                                 hintStyle:
-                                const TextStyle(color: Colors.black26),
+                                    const TextStyle(color: Colors.black26),
                                 filled: true,
                                 fillColor: Colors.white,
                                 border: OutlineInputBorder(
@@ -157,7 +158,7 @@ Future<void> registerUser() async {
                           ],
                         ),
                       ),
-                      const SizedBox(width: 20), // مسافة بين الحقلين
+                      const SizedBox(width: 20),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -175,7 +176,7 @@ Future<void> registerUser() async {
                                     vertical: 10.0, horizontal: 15.0),
                                 hintText: 'lname',
                                 hintStyle:
-                                const TextStyle(color: Colors.black26),
+                                    const TextStyle(color: Colors.black26),
                                 filled: true,
                                 fillColor: Colors.white,
                                 border: OutlineInputBorder(
@@ -250,9 +251,9 @@ Future<void> registerUser() async {
                     color: Colors.white60,
                   ),
                   SizedBox(height: size.height / 300),
+                  // Phone Number field
                   TextField(
                     controller: phoneNumberController,
-                    // Phone Number field
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 10.0, horizontal: 15.0),
@@ -299,10 +300,10 @@ Future<void> registerUser() async {
                       SizedBox(width: 20),
                       _image != null
                           ? Image.file(
-                        _image!,
-                        width: 100,
-                        height: 100,
-                      )
+                              _image!,
+                              width: 100,
+                              height: 100,
+                            )
                           : Container(),
                     ],
                   ),

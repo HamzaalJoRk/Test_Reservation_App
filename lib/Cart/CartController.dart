@@ -3,7 +3,7 @@ import 'package:reservation_app/model/model.dart';
 
 class CartController extends GetxController {
   var cartItems = <Products>[].obs;
-  var countProducts = 0.obs; // استخدام RxInt بدلاً من int
+  var countProducts = 0.obs;
 
   void addToCart(Products item) {
     cartItems.add(item);

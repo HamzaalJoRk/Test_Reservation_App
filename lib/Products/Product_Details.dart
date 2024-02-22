@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-//import 'package:get/get_core/src/get_main.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:reservation_app/Cart/Cart.dart';
 import 'package:reservation_app/Cart/CartController.dart';
+import 'package:reservation_app/components/CustomSnackbar%20.dart';
 import 'package:reservation_app/components/Custom_Button.dart';
+import 'package:reservation_app/components/Custom_text.dart';
 import 'package:reservation_app/model/model.dart';
+import 'package:reservation_app/view/bottom_bar.dart';
 import 'package:reservation_app/view/main_screen.dart';
 
 class ProductDetails extends StatelessWidget {
@@ -14,7 +16,6 @@ class ProductDetails extends StatelessWidget {
   ProductDetails({Key? key, required this.item}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 222, 220, 220),
       appBar: AppBar(
@@ -48,37 +49,33 @@ class ProductDetails extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           // عرض تفاصيل المنتج
           Expanded(
             flex: 2,
             child: Container(
               color: Colors.white70,
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    '${item.title}',
-                    style: const TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  CustomText(
+                    text: item.title,
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
                   ),
                   const SizedBox(height: 10),
-                  Text(
-                    '\$${item.price}.00',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25,
-                      color: Colors.black,
-                    ),
+                  CustomText(
+                    text: '\$${item.price}.00',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
                   ),
                 ],
               ),
             ),
           ),
           const SizedBox(height: 15),
+          // Description
           Expanded(
             flex: 5,
             child: Container(
@@ -87,47 +84,41 @@ class ProductDetails extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Description',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  const CustomText(
+                    text: 'Description',
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  const Text(
-                    'The quick brown fox jumps over the lazy dog. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pulvinar gravida justo, sed accumsan nulla tempor eu. Vestibulum ante ',
-                    style: TextStyle(fontSize: 18),
+                  const CustomText(
+                    text:
+                        'The quick brown fox jumps over the lazy dog. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pulvinar gravida justo, sed accumsan nulla tempor eu. Vestibulum ante ',
+                    fontSize: 18,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   // Butuom
                   Row(
                     children: [
                       CustomButton(
-                        onPressed: () {
-                          print('Buy Now');
-                        },
+                        onPressed: () {},
                         text: 'Buy Now',
-                        color: Colors.black, // تخصيص لون الخلفية
-                        textColor: Colors.white, // تخصيص لون النص
+                        color: Colors.black,
+                        textColor: Colors.white,
                       ),
-                      SizedBox(width: 60),
+                      const SizedBox(width: 60),
                       if (item.added == false)
                         CustomButton(
                           onPressed: () {
                             cartController.addToCart(item);
-                            Get.to(() => MainScreen());
+                            Get.to(() => const Bottombar());
                             item.added = true;
-                            Get.snackbar(
-                              '',
+                            CustomSnackbar.show(
+                              context,
                               'تمت الاضافة الى السلة بنجاح',
-                              backgroundColor: Colors.green,
-                              colorText: Colors.white,
-                              snackPosition: SnackPosition.BOTTOM,
                             );
                           },
                           text: 'Add to Cart',
@@ -137,7 +128,7 @@ class ProductDetails extends StatelessWidget {
                       if (item.added == true)
                         CustomButton(
                           onPressed: () {
-                            Get.to(() => Cart());
+                            Get.to(() => const Cart());
                             item.added = true;
                           },
                           text: 'Show Cart',

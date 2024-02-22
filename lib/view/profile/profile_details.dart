@@ -1,17 +1,16 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:reservation_app/view/auth/AuthController.dart';
+import 'package:reservation_app/view/auth/AuthService.dart';
 import 'package:reservation_app/view/profile/update_profile.dart';
-import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileDetails extends StatelessWidget {
   ProfileDetails({Key? key});
   final AuthController authController = Get.find();
+  final AuthService _authService = AuthService();
 
+/*
   Future<Map<String, dynamic>> getUserData() async {
     final Uri url = Uri.parse('http://10.0.2.2:8000/api/user');
 
@@ -35,15 +34,15 @@ class ProfileDetails extends StatelessWidget {
     } catch (error) {
       throw Exception('Failed to load user data: $error');
     }
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Map<String, dynamic>>(
-      future: getUserData(),
+      future: _authService.getUserData(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
         } else {
@@ -58,9 +57,7 @@ class ProfileDetails extends StatelessWidget {
               ),
               actions: [
                 IconButton(
-                  onPressed: () {
-                    // Add your action here
-                  },
+                  onPressed: () {},
                   icon: const Icon(Icons.brightness_6),
                 ),
               ],
@@ -73,6 +70,7 @@ class ProfileDetails extends StatelessWidget {
                 children: [
                   Stack(
                     children: [
+                      // Image
                       SizedBox(
                         width: 120,
                         height: 120,
@@ -86,29 +84,13 @@ class ProfileDetails extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Positioned(
-                        bottom: 0,
-                        right: 0,
-                        child: Container(
-                          width: 35,
-                          height: 35,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            color: const Color(0xFF8857F1),
-                          ),
-                          child: const Icon(
-                            LineAwesomeIcons.camera,
-                            color: Colors.black,
-                            size: 20,
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                   const SizedBox(height: 40),
                   Form(
                     child: Column(
                       children: [
+                        //Full Name
                         TextFormField(
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -118,10 +100,13 @@ class ProfileDetails extends StatelessWidget {
                             prefixIcon: const Icon(LineAwesomeIcons.user),
                           ),
                           style: const TextStyle(color: Colors.black),
-                          initialValue: userData != null ? "${userData['fname'] ?? ''} ${userData['lname'] ?? ''}" : '',
+                          initialValue: userData != null
+                              ? "${userData['fname'] ?? ''} ${userData['lname'] ?? ''}"
+                              : '',
                           readOnly: true,
                         ),
                         const SizedBox(height: 15),
+                        // Email
                         TextFormField(
                           decoration: InputDecoration(
                             labelText: 'Email'.tr,
@@ -132,11 +117,11 @@ class ProfileDetails extends StatelessWidget {
                           ),
                           style: const TextStyle(color: Colors.black),
                           initialValue: userData?['email'],
-                          readOnly: true,  
+                          readOnly: true,
                         ),
                         const SizedBox(height: 15),
+                        // Phone
                         TextFormField(
-                          
                           decoration: InputDecoration(
                             labelText: 'PhoneNo'.tr,
                             prefixIcon: const Icon(LineAwesomeIcons.phone),
@@ -146,15 +131,16 @@ class ProfileDetails extends StatelessWidget {
                           ),
                           style: const TextStyle(color: Colors.black),
                           initialValue: userData?['phoneNumber'],
-                          readOnly: true,  
+                          readOnly: true,
                         ),
                         const SizedBox(height: 15),
+                        // Location
                         TextFormField(
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(50.0),
                             ),
-                            labelText: 'Password'.tr,
+                            labelText: 'Location'.tr,
                             prefixIcon: const Icon(Icons.fingerprint),
                           ),
                           style: const TextStyle(color: Colors.black),

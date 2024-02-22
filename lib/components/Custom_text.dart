@@ -7,7 +7,7 @@ class CustomText extends StatelessWidget {
   final FontWeight fontWeight;
   final Alignment alignment;
 
-  const CustomText({
+  const CustomText( {
     this.text = '',
     this.fontSize = 17,
     this.color = Colors.black,

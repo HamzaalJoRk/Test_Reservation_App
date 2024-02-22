@@ -6,31 +6,33 @@ import 'package:reservation_app/components/Custom_text.dart';
 import 'package:reservation_app/model/model.dart';
 
 class Cart extends StatefulWidget {
-  Cart({Key? key}) : super(key: key);
+  const Cart({Key? key}) : super(key: key);
 
   @override
   _CartState createState() => _CartState();
 }
 
 class _CartState extends State<Cart> {
-  int quantity = 1;
   final CartController cartController = Get.find();
-
+  int totalprice = 0;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 222, 220, 220),
+      backgroundColor: const Color.fromARGB(255, 222, 220, 220),
       appBar: AppBar(
-        title: Text('Cart'),
+        title: const Text('Cart'),
       ),
       body: Column(
         children: [
+          //Products List
           Expanded(
             child: ListView.builder(
               itemCount: cartController.cartItems.length,
               itemBuilder: (context, index) {
                 Products item = cartController.cartItems[index];
+                totalprice = item.count * item.price;
                 return Center(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -50,55 +52,62 @@ class _CartState extends State<Cart> {
                                 fit: BoxFit.cover,
                               ),
                             ),
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  '${item.title}',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                CustomText(
+                                  text: item.title,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                Text(
-                                  '\$${item.price}.00',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.grey,
-                                  ),
+                                CustomText(
+                                  text: '\$${item.price}.00',
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey,
                                 ),
+                                Row(
+                                  children: [
+                                    const CustomText(
+                                      text: 'Total: ',
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    CustomText(
+                                      text: '\$$totalprice.00',
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold,
+                                    )
+                                  ],
+                                )
                               ],
                             ),
-                            Spacer(),
+                            const Spacer(),
                             Row(
                               children: [
                                 IconButton(
                                   onPressed: () {
                                     setState(() {
-                                      quantity++;
+                                      item.count++;
                                     });
                                   },
-                                  icon: Icon(Icons.add),
+                                  icon: const Icon(Icons.add),
                                 ),
-                                Text(
-                                  '$quantity',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                CustomText(
+                                  text: '${item.count}',
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
                                 ),
                                 IconButton(
                                   onPressed: () {
-                                    if (quantity > 1) {
+                                    if (item.count > 1) {
                                       setState(() {
-                                        quantity--;
+                                        item.count--;
                                       });
-                                      //print(item.added);
                                     }
                                   },
-                                  icon: Icon(Icons.remove),
+                                  icon: const Icon(Icons.remove),
                                 ),
                               ],
                             ),
@@ -111,11 +120,12 @@ class _CartState extends State<Cart> {
               },
             ),
           ),
+          //Payment Summary
           Container(
             height: size.height / 4,
             color: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.all(17.0),
+            child: const Padding(
+              padding: EdgeInsets.all(17.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -183,7 +193,8 @@ class _CartState extends State<Cart> {
               ),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
+          //Button Proceed to Payment
           Container(
             width: double.infinity,
             height: size.height / 8,
@@ -193,7 +204,7 @@ class _CartState extends State<Cart> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
+                  const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

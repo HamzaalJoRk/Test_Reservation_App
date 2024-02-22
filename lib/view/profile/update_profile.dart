@@ -33,16 +33,7 @@ class UpdateProfileScreen extends StatelessWidget {
             )),
         actions: [
           IconButton(
-            onPressed: () {
-              /*
-              if (Get.isDarkMode) {
-                Get.changeTheme(Themes.customLightTheme);
-                print("Light");
-              } else {
-                Get.changeTheme(Themes.customDarkTheme);
-                print("Dark");
-              }*/
-            },
+            onPressed: () {},
             icon: const Icon(
               Icons.brightness_6,
             ),

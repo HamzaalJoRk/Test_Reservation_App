@@ -14,6 +14,7 @@ class Products {
   //String description;
   int price;
   bool added;
+  int count;
 
   Products({
     required this.title,
@@ -21,5 +22,6 @@ class Products {
     required this.price,
     this.added = false,
     //required this.description,
+    this.count = 1,
   });
 }
