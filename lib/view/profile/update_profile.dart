@@ -6,7 +6,6 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:reservation_app/components/Custom_text.dart';
 import 'package:reservation_app/view/auth/AuthController.dart';
-import 'package:reservation_app/view/main_screen.dart';
 import 'package:reservation_app/view/splash.dart';
 
 class UpdateProfileScreen extends StatelessWidget {

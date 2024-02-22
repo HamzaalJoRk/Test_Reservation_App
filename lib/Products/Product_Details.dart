@@ -8,7 +8,6 @@ import 'package:reservation_app/components/Custom_Button.dart';
 import 'package:reservation_app/components/Custom_text.dart';
 import 'package:reservation_app/model/model.dart';
 import 'package:reservation_app/view/bottom_bar.dart';
-import 'package:reservation_app/view/main_screen.dart';
 
 class ProductDetails extends StatelessWidget {
   final Products item;

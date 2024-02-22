@@ -30,13 +30,15 @@ class _MyDataTableState extends State<MyDataTable> {
       setState(() {
         loading = true;
       });
-      final response = await http.get(Uri.parse("http://10.0.2.2:8000/api/reservation/houres"));
+      final response = await http
+          .get(Uri.parse("http://10.0.2.2:8000/api/reservation/houres"));
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         print(data);
 
-        List<Map<String, dynamic>> reservationsList = List<Map<String, dynamic>>.from(data["reservations"]);
+        List<Map<String, dynamic>> reservationsList =
+            List<Map<String, dynamic>>.from(data["reservations"]);
 
         if (data["status"] != 200) {
           throw Exception("Failed to load data: ${data['status']}");
@@ -61,18 +63,20 @@ class _MyDataTableState extends State<MyDataTable> {
   // Filter reservations based on selected date
   void filterReservationsByDate() {
     filteredReservations = allReservations
-        .where((reservation) => DateTime.parse(reservation["date"]).isAtSameMomentAs(selectedDate))
+        .where((reservation) =>
+            DateTime.parse(reservation["date"]).isAtSameMomentAs(selectedDate))
         .toList();
   }
 
   // Function to show date picker
   Future<void> _selectDate(BuildContext context) async {
     final DateTime picked = (await showDatePicker(
-      context: context,
-      initialDate: selectedDate,
-      firstDate: DateTime(2022),
-      lastDate: DateTime(2023),
-    )) ?? selectedDate;
+          context: context,
+          initialDate: selectedDate,
+          firstDate: DateTime(2022),
+          lastDate: DateTime(2023),
+        )) ??
+        selectedDate;
 
     if (picked != null && picked != selectedDate) {
       setState(() {
@@ -91,8 +95,10 @@ class _MyDataTableState extends State<MyDataTable> {
     await showDatePicker(
       context: context,
       initialDate: selectedDate,
-      firstDate: availableDates.reduce((value, element) => value.isBefore(element) ? value : element),
-      lastDate: availableDates.reduce((value, element) => value.isAfter(element) ? value : element),
+      firstDate: availableDates.reduce(
+          (value, element) => value.isBefore(element) ? value : element),
+      lastDate: availableDates
+          .reduce((value, element) => value.isAfter(element) ? value : element),
     );
   }
 
@@ -101,8 +107,7 @@ class _MyDataTableState extends State<MyDataTable> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          if (loading)
-            const CircularProgressIndicator(),
+          if (loading) const CircularProgressIndicator(),
           if (!loading)
             Column(
               children: [
@@ -119,23 +124,27 @@ class _MyDataTableState extends State<MyDataTable> {
                       DataColumn(label: Text('Action')),
                       // Add more DataColumn widgets as needed
                     ],
-                    rows: filteredReservations.map(
+                    rows: filteredReservations
+                        .map(
                           (reservation) => DataRow(
-                        cells: [
-                          DataCell(Text(reservation["time"])),
-                          DataCell(Text(reservation["totalNumber"])),
-                          DataCell(
-                            ElevatedButton(
-                              onPressed: () {
-                                Get.to(() => RequestReservationPage(id: reservation["id"]));
-                                print("Button pressed for ID: ${reservation["id"]}");
-                              },
-                              child: const Text("Action"),
-                            ),
+                            cells: [
+                              DataCell(Text(reservation["time"])),
+                              DataCell(Text(reservation["totalNumber"])),
+                              DataCell(
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Get.to(() => RequestReservationPage(
+                                        id: reservation["id"]));
+                                    print(
+                                        "Button pressed for ID: ${reservation["id"]}");
+                                  },
+                                  child: const Text("Action"),
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ).toList(),
+                        )
+                        .toList(),
                   ),
                 ),
               ],
