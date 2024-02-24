@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:reservation_app/components/CustomSnackbar%20.dart';
 import 'package:reservation_app/components/Custom_text.dart';
 import 'package:reservation_app/view/auth/AuthController.dart';
 import 'package:reservation_app/view/bottom_bar.dart';
@@ -80,12 +81,10 @@ class _RegisterPageState extends State<RegisterPage> {
         authController.setFName(fname);
         authController.setLName(lname);
 
-        Get.snackbar(
-          'Success',
+        // ignore: use_build_context_synchronously
+        CustomSnackbar.show(
+          context,
           'تم التسجيل بنجاح',
-          backgroundColor: Colors.green,
-          colorText: Colors.white,
-          snackPosition: SnackPosition.BOTTOM,
         );
         Get.to(() => const Bottombar());
       } else {
