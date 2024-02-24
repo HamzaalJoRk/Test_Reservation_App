@@ -49,6 +49,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.18.0"
+<<<<<<< HEAD
   cross_file:
     dependency: transitive
     description:
@@ -57,6 +58,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.3+8"
+=======
+>>>>>>> main
   crypto:
     dependency: transitive
     description:
@@ -73,6 +76,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.6"
+<<<<<<< HEAD
   dio:
     dependency: "direct main"
     description:
@@ -81,6 +85,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.6"
+=======
+>>>>>>> main
   fake_async:
     dependency: transitive
     description:
@@ -105,6 +111,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.0.0"
+<<<<<<< HEAD
   file_selector_linux:
     dependency: transitive
     description:
@@ -137,6 +144,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.9.3+1"
+=======
+>>>>>>> main
   flutter:
     dependency: "direct main"
     description: flutter
@@ -150,6 +159,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.3"
+<<<<<<< HEAD
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -158,6 +168,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.17"
+=======
+>>>>>>> main
   flutter_spinkit:
     dependency: "direct main"
     description:
@@ -201,7 +213,11 @@ packages:
     source: hosted
     version: "3.0.1"
   http:
+<<<<<<< HEAD
     dependency: "direct main"
+=======
+    dependency: transitive
+>>>>>>> main
     description:
       name: http
       sha256: a2bbf9d017fcced29139daa8ed2bba4ece450ab222871df93ca9eec6f80c34ba
@@ -216,6 +232,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+<<<<<<< HEAD
   image_picker:
     dependency: "direct main"
     description:
@@ -280,6 +297,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.1+1"
+=======
+>>>>>>> main
   intl:
     dependency: transitive
     description:
@@ -328,6 +347,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.10.0"
+<<<<<<< HEAD
   mime:
     dependency: transitive
     description:
@@ -336,6 +356,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+=======
+>>>>>>> main
   path:
     dependency: transitive
     description:

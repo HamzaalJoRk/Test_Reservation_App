@@ -1,10 +1,18 @@
 import 'dart:async';
+<<<<<<< HEAD
 import 'package:get/get.dart';
 // import 'package:hexcolor/hexcolor.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:reservation_app/Cart/Cart.dart';
 import 'package:reservation_app/Cart/CartController.dart';
+=======
+
+import 'package:get/get.dart';
+import 'package:hexcolor/hexcolor.dart';
+import 'package:animate_do/animate_do.dart';
+import 'package:flutter/material.dart';
+>>>>>>> main
 import 'package:reservation_app/Reservation/index.dart';
 import 'package:reservation_app/components/big_item.dart';
 import 'package:reservation_app/components/middle_text.dart';
@@ -20,7 +28,10 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   final PageController _pageController = PageController();
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
   int _currentIndex = 0;
   @override
   void initState() {
@@ -128,8 +139,12 @@ class _MainScreenState extends State<MainScreen> {
 
                           FadeInRight(
                             delay: const Duration(milliseconds: 1400),
+<<<<<<< HEAD
                             child:
                                 BigItemSection(itemList: bestsForCustomerList),
+=======
+                            child: BigItemSection(itemList: bestsForCustomerList),
+>>>>>>> main
                           ),
 
                           /// Product Text
@@ -144,8 +159,12 @@ class _MainScreenState extends State<MainScreen> {
                           /// Big Item Section - ListView
                           FadeInRight(
                             delay: const Duration(milliseconds: 1400),
+<<<<<<< HEAD
                             child:
                                 BigItemSection(itemList: bestsForCustomerList),
+=======
+                            child: BigItemSection(itemList: bestsForCustomerList),
+>>>>>>> main
                           ),
 
                           ///
@@ -289,12 +308,19 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+<<<<<<< HEAD
     final CartController cartController = Get.find<CartController>();
+=======
+>>>>>>> main
     return SizedBox(
         width: size.width,
         height: size.height / 8,
         child: Stack(
           children: [
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
             // Top Right Nav bar icons
             Positioned(
               top: 35,
@@ -316,6 +342,7 @@ class CustomAppBar extends StatelessWidget {
                       const SizedBox(
                         width: 5,
                       ),
+<<<<<<< HEAD
                       Expanded(
                         child: Container(
                           height: (size.height / 15) / 1.8,
@@ -377,6 +404,46 @@ class CustomAppBar extends StatelessWidget {
                           ],
                         ),
                       ),
+=======
+                      Expanded(child:
+                      Container(
+                        height: (size.height / 15) / 1.8,
+                        padding: const EdgeInsets.only(right: 5,left: 5),
+                        child: TextField(
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            // contentPadding: const EdgeInsets.all(10),
+                            suffixIcon: const Icon(
+                              Icons.search,
+                              color: Color.fromARGB(255, 146, 146, 146),
+                            ),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30),
+                                borderSide: BorderSide.none),
+                            hintText: "Search here",
+                            hintStyle: const TextStyle(
+                                fontSize: 10,
+                                color: Color.fromARGB(255, 131, 131, 131)),
+                          ),
+                        ),
+                      ),
+                      ),
+                      IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.favorite,
+                            size: iconSize,
+                            color: Colors.white,
+                          )),
+                      IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.shopping_cart,
+                            size: iconSize,
+                            color: Colors.white,
+                          )),
+>>>>>>> main
                     ],
                   ),
                 ),
@@ -386,3 +453,9 @@ class CustomAppBar extends StatelessWidget {
         ));
   }
 }
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> main

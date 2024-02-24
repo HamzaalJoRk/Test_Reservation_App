@@ -1,7 +1,10 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:get/get.dart';
 import 'package:reservation_app/Products/Product_Details.dart';
+=======
+>>>>>>> main
 
 class BigItemSection extends StatelessWidget {
   const BigItemSection({
@@ -29,8 +32,12 @@ class BigItemSection extends StatelessWidget {
             delay: Duration(milliseconds: index * 200),
             child: InkWell(
               onTap: () {
+<<<<<<< HEAD
                 // تمرير معلومات المنتج عبر وسيطة إلى صفحة تفاصيل المنتج
                 Get.to(() => ProductDetails(item: itemList[index]));
+=======
+
+>>>>>>> main
               },
               child: Column(
                 children: [

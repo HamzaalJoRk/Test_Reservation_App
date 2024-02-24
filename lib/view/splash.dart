@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+<<<<<<< HEAD
 import 'package:reservation_app/view/bottom_bar.dart';
 // import 'package:reservation_app/view/main_screen.dart';
+=======
+import 'package:reservation_app/view/main_screen.dart';
+>>>>>>> main
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -15,7 +19,11 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     Future.delayed(const Duration(seconds: 3)).then((value) {
       Navigator.of(context).pushReplacement(
+<<<<<<< HEAD
           MaterialPageRoute(builder: (context) => const Bottombar()));
+=======
+          MaterialPageRoute(builder: (context) => const MainScreen()));
+>>>>>>> main
     });
 
     super.initState();

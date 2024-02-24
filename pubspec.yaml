@@ -13,9 +13,13 @@ dependencies:
   flutter:
     sdk: flutter
 
+<<<<<<< HEAD
   http: ^1.2.0
   image_picker: ^0.8.4+4
   dio: ^4.0.0
+=======
+
+>>>>>>> main
   cupertino_icons: ^1.0.6
   flutter_spinkit: ^5.2.0
   google_fonts: ^6.1.0
